@@ -1,4 +1,4 @@
-package Controller;
+package MessageListeners;
 
 import Exeptions.MyExceptionListener;
 import model.Car;
@@ -20,8 +20,8 @@ public class FilterMessageListener implements MessageListener {
     final static Logger logger = Logger.getLogger(FilterMessageListener.class);
     private String consumerName;
     private Car tempCar = null;
-    private  String url = ActiveMQConnection.DEFAULT_BROKER_URL;
-    private  String subject = "Topic2";
+    private String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+    private String subject = "Topic2";
 
     public FilterMessageListener(String consumerName) {
         this.consumerName = consumerName;
@@ -41,6 +41,7 @@ public class FilterMessageListener implements MessageListener {
             logger.error(e);
         }
 
+        // Cars filter starts
         if (tempCar.getEngine() > 2.0 & tempCar.getYear() > 2000) {
             try {
                 ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
@@ -62,7 +63,7 @@ public class FilterMessageListener implements MessageListener {
                 logger.error(e);
             }
         } else {
-            System.out.println("Car " + tempCar + " does not meet the filtering requirements" );
+            System.out.println("Sorry, these " + tempCar + ", does not meet the filtering requirements");
         }
     }
 }

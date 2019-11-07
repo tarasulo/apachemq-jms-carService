@@ -1,6 +1,5 @@
 package Exeptions;
 
-
 import org.apache.log4j.Logger;
 
 import javax.jms.JMSException;

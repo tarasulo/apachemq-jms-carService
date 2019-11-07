@@ -33,20 +33,20 @@ public class NewCarsSender {
             Session session = connection.createSession(false,
                     Session.AUTO_ACKNOWLEDGE);
 
-            //Destination represents here our queue 'JCG_QUEUE' on the JMS server.
+            //Destination represents here our queue 'Topic1' on the JMS server.
             //The queue will be created automatically on the server.
             Destination destination = session.createQueue(subject);
 
             // MessageProducer is used for sending messages to the queue.
             MessageProducer producer = session.createProducer(destination);
 
-            // We will send a object "book"
-
+            // We will send a object "car"
             ObjectMessage message = session.createObjectMessage(car);
 
-            // Here we are sending our message!
+            // Here we are sending our object!
             producer.send(message);
             connection.close();
+            // We should wait for 1 sec for the next car creating
             Thread.sleep(1000);
         }
     }

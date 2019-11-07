@@ -1,5 +1,6 @@
 package Controller;
 
+import MessageListeners.StandardizerMessageListener;
 import Exeptions.MyExceptionListener;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -24,7 +25,7 @@ public class CarStandardizerController {
                 Session.AUTO_ACKNOWLEDGE);
         Destination destination = session.createQueue(subject);
         MessageConsumer consumer = session.createConsumer(destination);
-        consumer.setMessageListener(new StandardizerMessageListener("Consumer"));
+        consumer.setMessageListener(new StandardizerMessageListener("CarsStandardizer"));
         connection.start();
     }
 }

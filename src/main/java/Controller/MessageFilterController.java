@@ -1,5 +1,6 @@
 package Controller;
 
+import MessageListeners.FilterMessageListener;
 import Exeptions.MyExceptionListener;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -30,14 +31,12 @@ public class MessageFilterController {
         Session session = connection.createSession(false,
                 Session.AUTO_ACKNOWLEDGE);
 
-        // Getting the queue 'JCG_QUEUE'
+        // Getting the queue 'Topic1'
         Destination destination = session.createQueue(subject);
 
         // MessageConsumer is used for receiving (consuming) messages
         MessageConsumer consumer = session.createConsumer(destination);
-        consumer.setMessageListener(new FilterMessageListener("Consumer"));
+        consumer.setMessageListener(new FilterMessageListener("CarsFilter"));
         connection.start();
-
-        //object filter
     }
 }

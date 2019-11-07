@@ -1,4 +1,4 @@
-package Controller;
+package MessageListeners;
 
 import model.Car;
 import org.apache.log4j.Logger;
@@ -31,12 +31,12 @@ public class StandardizerMessageListener implements MessageListener {
             logger.error(e);
         }
 
+        // Cars standardizer starts work
         standardizerCar.setBrand(standardizerCar.getBrand().toUpperCase());
         standardizerCar.setModel(standardizerCar.getModel().toUpperCase());
 
         System.out.println(" Hello Mates! we got new car: " + standardizerCar.getBrand()
                 + " model: " + standardizerCar.getModel() + " with engine " + standardizerCar.getEngine()
                 + " from year - " + standardizerCar.getYear());
-
     }
 }
