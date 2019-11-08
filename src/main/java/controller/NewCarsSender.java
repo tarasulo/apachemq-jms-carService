@@ -1,6 +1,7 @@
-package Controller;
+package controller;
 
-import Exeptions.MyExceptionListener;
+import authentication.Authentication;
+import exeptions.MyExceptionListener;
 import model.Car;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -17,10 +18,13 @@ public class NewCarsSender {
 
     private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
     private static String subject = "Topic1";
+    private static boolean auth = false;
 
     public static void main(String[] args) throws JMSException, InterruptedException {
 
-        while (true) {
+        auth = Authentication.isValid();
+
+        while (auth) {
 
             //Creating new car
             Car car = new Car();
@@ -43,7 +47,6 @@ public class NewCarsSender {
             // We will send a object "car"
             ObjectMessage message = session.createObjectMessage(car);
 
-            // Here we are sending our object!
             producer.send(message);
             connection.close();
             // We should wait for 1 sec for the next car creating

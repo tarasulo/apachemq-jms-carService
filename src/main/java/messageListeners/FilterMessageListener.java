@@ -1,6 +1,6 @@
-package MessageListeners;
+package messageListeners;
 
-import Exeptions.MyExceptionListener;
+import exeptions.MyExceptionListener;
 import model.Car;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
