@@ -1,5 +1,4 @@
-package Exeptions;
-
+package exeptions;
 
 import org.apache.log4j.Logger;
 
