@@ -1,12 +1,10 @@
 <configuration scan="true">
 
-    <property name="LOG" value="/Users/tkhal/IdeaProjects/jms-car-service/logs/app.log"/>/Users/tkhal/IdeaProjects/activemq/logs
-
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG}</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>/Users/tkhal/IdeaProjects/jms-car-service/logs/app.log</fileNamePattern>
+            <fileNamePattern>logs/template-server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- each archived file, size max 10MB -->
             <maxFileSize>10MB</maxFileSize>
             <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
@@ -16,7 +14,7 @@
         </rollingPolicy>
 
         <encoder>
-            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
