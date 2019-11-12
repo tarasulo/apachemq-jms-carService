@@ -3,8 +3,9 @@ package controller;
 import authentication.Authentication;
 import messageListeners.FilterMessageListener;
 import exeptions.MyExceptionListener;
-import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -12,19 +13,35 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class MessageFilterController {
 
-    // URL of the JMS server
-    private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
-    // default broker URL is : tcp://localhost:61616"
-
-    // Name of the queue we will receive messages from
-    private static String subject = "Topic1";
-
+    final static Logger logger = LoggerFactory.getLogger(MessageFilterController.class);
+    private static String url;
+    private static String subject;
     private static boolean auth = false;
 
-    public static void main(String[] args) throws JMSException {
+    static {
+        try {
+            subject = getPropValues("subject1");
+            url = getPropValues("url");
+        } catch (IOException e) {
+            logger.error(String.valueOf(e));
+        }
+    }
+
+    private static String getPropValues(String prop) throws IOException {
+        InputStream input = new FileInputStream("src/main/resources/config.properties");
+        Properties properties = new Properties();
+        properties.load(input);
+        return properties.getProperty(prop);
+    }
+
+    public static void main(String[] args) throws JMSException, IOException, InterruptedException {
 
         auth = Authentication.isValid();
 

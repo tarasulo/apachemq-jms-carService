@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Car implements Serializable {
 
-    private static final long serialVersionUID = 2966742605062054882L;
+    private static final long serialVersionUID = -2785326698250367788L;
     private String brand;
     private String model;
     private int year;

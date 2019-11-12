@@ -1,0 +1,32 @@
+<configuration scan="true">
+
+    <property name="LOG" value="/Users/tkhal/IdeaProjects/jms-car-service/logs/app.log"/>/Users/tkhal/IdeaProjects/activemq/logs
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG}</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>/Users/tkhal/IdeaProjects/jms-car-service/logs/app.log</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
+            <totalSizeCap>20GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="car-service" level="debug">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

@@ -3,8 +3,9 @@ package controller;
 import authentication.Authentication;
 import messageListeners.StandardizerMessageListener;
 import exeptions.MyExceptionListener;
-import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -12,11 +13,28 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class CarStandardizerController {
-    private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
-    private static String subject = "Topic2";
+    final static Logger logger = LoggerFactory.getLogger(CarStandardizerController.class);
+    private static String url;
+    private static String subject;
     private static boolean auth = false;
+
+    static {
+        try {
+            InputStream input = new FileInputStream("src/main/resources/config.properties");
+            Properties prop = new Properties();
+            prop.load(input);
+            subject = prop.getProperty("subject2");
+            url = prop.getProperty("url");
+        } catch (IOException e) {
+            logger.error(String.valueOf(e));
+        }
+    }
 
     public static void main(String[] args) throws JMSException {
 
