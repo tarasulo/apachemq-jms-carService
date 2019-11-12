@@ -62,7 +62,11 @@ Class-Path: activemq-all-5.15.10.jar slf4j-api-1.7.25.jar netty-transpor
 
 * java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp CarStandardizerController.jar controller.CarStandardizerController
 
+
  #Enjoy!
+ 
+ It will be run after the correct Class-Path.
+ I used libraries jar files in the same folder as main jar files.
  
  # <a name="author"></a>Author
  * [Taras Khalak](https://github.com/tarasulo)
