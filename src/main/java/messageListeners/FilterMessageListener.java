@@ -29,7 +29,8 @@ public class FilterMessageListener implements MessageListener {
     private String subject = getPropValues("subject2");
 
     public String getPropValues(String prop) throws IOException {
-        InputStream input = new FileInputStream("src/main/resources/config.properties");
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classloader.getResourceAsStream("config.properties");
         Properties properties = new Properties();
         properties.load(input);
         return properties.getProperty(prop);

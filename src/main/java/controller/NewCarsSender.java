@@ -6,6 +6,7 @@ import model.Car;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import servise.CarService;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -14,7 +15,6 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -28,7 +28,8 @@ public class NewCarsSender {
 
     static {
         try {
-            InputStream input = new FileInputStream("src/main/resources/config.properties");
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classloader.getResourceAsStream("config.properties");
             Properties prop = new Properties();
             prop.load(input);
             subject = prop.getProperty("subject1");
@@ -46,6 +47,8 @@ public class NewCarsSender {
 
             //Creating new car
             Car car = new Car();
+            CarService carService = new CarService();
+            carService.makeCar(car);
             // Getting JMS connection from the server and starting it
             ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
             Connection connection = connectionFactory.createConnection();

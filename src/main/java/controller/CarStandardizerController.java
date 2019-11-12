@@ -26,7 +26,8 @@ public class CarStandardizerController {
 
     static {
         try {
-            InputStream input = new FileInputStream("src/main/resources/config.properties");
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classloader.getResourceAsStream("config.properties");
             Properties prop = new Properties();
             prop.load(input);
             subject = prop.getProperty("subject2");

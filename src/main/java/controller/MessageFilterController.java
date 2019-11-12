@@ -35,7 +35,8 @@ public class MessageFilterController {
     }
 
     private static String getPropValues(String prop) throws IOException {
-        InputStream input = new FileInputStream("src/main/resources/config.properties");
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classloader.getResourceAsStream("config.properties");
         Properties properties = new Properties();
         properties.load(input);
         return properties.getProperty(prop);
