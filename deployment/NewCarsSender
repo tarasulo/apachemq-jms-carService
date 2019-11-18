@@ -1,5 +1,8 @@
 #!/bin/bash
 
 cd $1
-jar cfm Filter.jar ./src/main/resources/manifests/filter/META-INF/MANIFEST.MF -C build .
-java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Filter.jar:$2/* controller.MessageFilterController
+mkdir build
+javac -cp ".:$2/*" -d ./build $(find . -name "*.java")
+cp -a ./src/main/resources/ ./build
+jar cfm Sender.jar ./src/main/resources/manifests/sender/META-INF/MANIFEST.MF -C build .
+java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Sender.jar:$2/* controller.NewCarsSender
