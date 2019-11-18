@@ -10,26 +10,38 @@ For starting the project you need to clone or download it from git.
  1) firstscript:
  
  "#!/bin/bash
+ 
  cd $1
+ 
  mkdir build
+ 
  javac -cp ".:$2/*" -d ./build $(find . -name "*.java")
+ 
  cp -a ./src/main/resources/ ./build
+ 
  jar cfm Sender.jar ./src/main/resources/manifests/sender/META-INF/MANIFEST.MF -C build .
+ 
  java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Sender.jar:$2/* controller.NewCarsSender
  "
  
  2) filterscript:
  
  "#!/bin/bash
+ 
   cd $1
+  
   jar cfm Filter.jar ./src/main/resources/manifests/filter/META-INF/MANIFEST.MF -C build .
+  
   java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Filter.jar:$2/* controller.MessageFilterController "
 
  3) lastscript:
  
  "#!/bin/bash
+ 
   cd $1
+  
   jar cfm Consumer.jar ./src/main/resources/manifests/consumer/META-INF/MANIFEST.MF -C build .
+  
   java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Consumer.jar:$2/* controller.CarStandardizerController"
   
   * How to run:
