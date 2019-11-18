@@ -7,7 +7,7 @@ For starting the project you need to clone or download it from git.
 
 # using scripts:
  * create 3 small scripts with next commands:
- 1) firstscript:
+ 1) NewCarsSender:
  
  "#!/bin/bash
  
@@ -24,7 +24,7 @@ For starting the project you need to clone or download it from git.
  java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Sender.jar:$2/* controller.NewCarsSender
  "
  
- 2) filterscript:
+ 2) Filterscript:
  
  "#!/bin/bash
  
@@ -34,7 +34,7 @@ For starting the project you need to clone or download it from git.
   
   java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Filter.jar:$2/* controller.MessageFilterController "
 
- 3) lastscript:
+ 3) CarStandardizer:
  
  "#!/bin/bash
  
@@ -47,9 +47,9 @@ For starting the project you need to clone or download it from git.
   * How to run:
   
   just write on terminal: 
-   * ./firstscript path1 path2
-   * ./filterscript path1 path2
-   * ./lastscript path1 path2
+   * ./NewCarsSender path1 path2
+   * ./Filterscript path1 path2
+   * ./CarStandardizer path1 path2
    
    where paht1 - it's path to the project folder, path2 - it's path to your libs.
    
