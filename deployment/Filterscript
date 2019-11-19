@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cd $1
-jar cfm Filter.jar ./src/main/resources/manifests/filter/META-INF/MANIFEST.MF -C build .
-java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Filter.jar:$2/* controller.MessageFilterController

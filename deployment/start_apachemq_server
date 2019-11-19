@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd $ACTIVEMQ_HOME
+activemq start

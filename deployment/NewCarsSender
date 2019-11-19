@@ -1,8 +1,4 @@
 #!/bin/bash
 
-cd $1
-mkdir build
-javac -cp ".:$2/*" -d ./build $(find . -name "*.java")
-cp -a ./src/main/resources/ ./build
-jar cfm Sender.jar ./src/main/resources/manifests/sender/META-INF/MANIFEST.MF -C build .
-java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Sender.jar:$2/* controller.NewCarsSender
+cd ..
+java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Sender.jar:producer/target/uber/* controller.NewCarsSender

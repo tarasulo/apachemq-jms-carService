@@ -1,5 +1,4 @@
 #!/bin/bash
 
-cd $1
-jar cfm Consumer.jar ./src/main/resources/manifests/consumer/META-INF/MANIFEST.MF -C build .
-java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Consumer.jar:$2/* controller.CarStandardizerController
+cd ..
+java -Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* -cp Consumer.jar:consumer/target/uber/* controller.CarStandardizerController
